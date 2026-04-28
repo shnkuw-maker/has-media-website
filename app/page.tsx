@@ -1,10 +1,11 @@
 'use client';
 
+import { motion } from 'framer-motion';
+import { useMemo, useState } from 'react';
+
 import { HasLogo } from '../components/components/components/has-logo';
 import { LanguageToggle } from '../components/components/components/language-toggle';
 import { SectionHeading } from '../components/components/components/section-heading';
-import { siteContent, type Lang } from '../components/site-content';
-import { SectionHeading } from '../components/section-heading';
 import { siteContent, type Lang } from '../components/site-content';
 
 const links = ['home', 'about', 'services', 'portfolio', 'contact'];
@@ -28,23 +29,35 @@ function ServiceCard({ title, text, index }: { title: string; text: string; inde
   );
 }
 
-function ProfilePanel({ title, category, text, index }: { title: string; category: string; text: string; index: number }) {
+function ProfilePanel({
+  title,
+  category,
+  text,
+  index,
+}: {
+  title: string;
+  category: string;
+  text: string;
+  index: number;
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.65, delay: index * 0.06, ease: 'easeOut' }}
-      className="profile-card rounded-[28px] overflow-hidden"
+      className="profile-card overflow-hidden rounded-[28px]"
     >
       <div className="bg-[linear-gradient(180deg,#faf6ee,#f3ebde)] p-6 md:p-8">
-        <div className="mb-8 text-xs tracking-[0.25em] uppercase text-[#b9943a]">{category}</div>
+        <div className="mb-8 text-xs uppercase tracking-[0.25em] text-[#b9943a]">{category}</div>
+
         <div className="mx-auto flex min-h-[18rem] max-w-[26rem] flex-col items-center justify-center rounded-[28px] border border-[rgba(185,148,58,0.14)] bg-white text-center shadow-[0_18px_45px_rgba(92,73,53,0.06)]">
           <HasLogo size="md" centered />
           <div className="mt-6 h-px w-24 bg-[rgba(185,148,58,0.3)]" />
           <div className="mt-6 px-6 text-2xl font-bold leading-[1.5] text-[#cf6f54]">{title}</div>
         </div>
       </div>
+
       <div className="bg-white px-6 py-5 md:px-8 md:py-6">
         <p className="text-base leading-8 text-[#6f6358]">{text}</p>
       </div>
@@ -67,6 +80,7 @@ export default function Home() {
             className="glass-panel soft-line sticky top-3 z-30 mb-8 flex items-center justify-between gap-4 rounded-[22px] border px-4 py-4 md:top-4 md:mb-12 md:px-7"
           >
             <HasLogo size="sm" />
+
             <nav className="hidden items-center gap-7 text-sm text-[#6f6358] lg:flex">
               {t.nav.map((item, index) => (
                 <a key={item} href={`#${links[index]}`} className="transition hover:text-[#cf6f54]">
@@ -74,6 +88,7 @@ export default function Home() {
                 </a>
               ))}
             </nav>
+
             <LanguageToggle lang={lang} onToggle={() => setLang((prev) => (prev === 'ar' ? 'en' : 'ar'))} />
           </motion.header>
 
@@ -85,17 +100,23 @@ export default function Home() {
               className="mx-auto max-w-4xl"
             >
               <HasLogo size="lg" centered />
+
               <div className="mx-auto mt-8 h-px w-24 bg-[rgba(185,148,58,0.28)]" />
-              <div className="mt-8 text-sm tracking-[0.26em] text-[#b9943a] uppercase">{t.heroBadge}</div>
+
+              <div className="mt-8 text-sm uppercase tracking-[0.26em] text-[#b9943a]">{t.heroBadge}</div>
+
               <h1 className="title-accent mx-auto mt-6 max-w-4xl text-3xl font-bold leading-[1.7] md:text-5xl">
                 {t.coverTitle}
               </h1>
+
               <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[#7b6e62] md:text-lg">
                 {t.coverSubtitle}
               </p>
+
               <p className="mx-auto mt-7 max-w-3xl text-base leading-8 text-[#6f6358] md:text-lg">
                 {t.heroText}
               </p>
+
               <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
                 <a
                   href="#services"
@@ -103,6 +124,7 @@ export default function Home() {
                 >
                   {t.ctaSecondary}
                 </a>
+
                 <a
                   href={whatsappUrl}
                   target="_blank"
@@ -121,6 +143,7 @@ export default function Home() {
         <div className="section-shell grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div className="profile-card rounded-[28px] p-7 md:p-10">
             <SectionHeading eyebrow={t.aboutEyebrow} title={t.aboutTitle} />
+
             <motion.p
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -131,6 +154,7 @@ export default function Home() {
               {t.aboutText}
             </motion.p>
           </div>
+
           <div className="profile-card flex min-h-[22rem] items-center justify-center rounded-[28px] bg-[linear-gradient(180deg,#faf6ee,#f4ece0)] p-8 text-center md:p-10">
             <div>
               <HasLogo size="md" centered />
@@ -144,6 +168,7 @@ export default function Home() {
       <section id="services" className="leaf-bg py-16 md:py-24">
         <div className="section-shell">
           <SectionHeading eyebrow={t.servicesEyebrow} title={t.servicesTitle} align="center" />
+
           <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {t.services.map((service, index) => (
               <ServiceCard key={service.title} title={service.title} text={service.text} index={index} />
@@ -155,6 +180,7 @@ export default function Home() {
       <section id="portfolio" className="leaf-bg py-16 md:py-24">
         <div className="section-shell">
           <SectionHeading eyebrow={t.portfolioEyebrow} title={t.portfolioTitle} />
+
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {t.portfolio.map((item, index) => (
               <ProfilePanel key={item.title} title={item.title} category={item.category} text={item.text} index={index} />
@@ -166,6 +192,7 @@ export default function Home() {
       <section className="py-16 md:py-24">
         <div className="section-shell">
           <SectionHeading eyebrow={t.clientsEyebrow} title={t.clientsTitle} align="center" />
+
           <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
             {t.clients.map((item, index) => (
               <motion.div
@@ -195,34 +222,48 @@ export default function Home() {
             <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
               <div>
                 <div className="mb-4 text-sm font-semibold text-[#b9943a]">{t.contactEyebrow}</div>
+
                 <h2 className="title-accent text-3xl font-bold leading-[1.6] md:text-5xl">{t.contactTitle}</h2>
+
                 <p className="mt-5 max-w-2xl text-base leading-8 text-[#6f6358]">{t.contactText}</p>
               </div>
+
               <div className="grid gap-3">
-                <a href={whatsappUrl} target="_blank" rel="noreferrer" className="rounded-full bg-[linear-gradient(135deg,#d9c27f,#b9943a,#94752b)] px-6 py-4 text-center text-sm font-semibold text-white">
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full bg-[linear-gradient(135deg,#d9c27f,#b9943a,#94752b)] px-6 py-4 text-center text-sm font-semibold text-white"
+                >
                   {t.contactPrimary}
                 </a>
-                <a href={emailUrl} className="rounded-full border border-[rgba(185,148,58,0.2)] bg-white px-6 py-4 text-center text-sm font-semibold text-[#6f6358]">
+
+                <a
+                  href={emailUrl}
+                  className="rounded-full border border-[rgba(185,148,58,0.2)] bg-white px-6 py-4 text-center text-sm font-semibold text-[#6f6358]"
+                >
                   {t.contactSecondary}
                 </a>
-                <a href={instagramUrl} target="_blank" rel="noreferrer" className="rounded-full border border-[rgba(185,148,58,0.2)] bg-white px-6 py-4 text-center text-sm font-semibold text-[#6f6358]">
+
+                <a
+                  href={instagramUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full border border-[rgba(185,148,58,0.2)] bg-white px-6 py-4 text-center text-sm font-semibold text-[#6f6358]"
+                >
                   {t.contactThird}
                 </a>
               </div>
             </div>
           </motion.div>
 
-          <footer className="mt-8 flex flex-col gap-4 border-t border-[rgba(185,148,58,0.16)] pt-6 text-sm text-[#7d6f63] md:flex-row md:items-center md:justify-between">
-            <div className="flex items-center gap-4">
-              <HasLogo size="sm" />
-              <span>{t.footer}</span>
-            </div>
-            <div className="flex flex-col gap-1 md:items-end">
-              <span>{t.location}</span>
-              <a href={instagramUrl} target="_blank" rel="noreferrer" className="text-[#cf6f54]">
-                @has_media.kw
-              </a>
-            </div>
+          <footer className="mt-8 flex flex-col items-center justify-center gap-4 border-t border-[rgba(185,148,58,0.16)] pt-6 text-center text-sm text-[#7d6f63]">
+            <HasLogo size="sm" centered />
+            <span>{t.footer}</span>
+            <span>{t.location}</span>
+            <a href={instagramUrl} target="_blank" rel="noreferrer" className="text-[#cf6f54]">
+              @has_media.kw
+            </a>
           </footer>
         </div>
       </section>
