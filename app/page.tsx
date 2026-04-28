@@ -1,12 +1,9 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useMemo, useState } from 'react';
-
-import { HasLogo } from '../components/components/components/has-logo';
-import { LanguageToggle } from '../components/components/components/language-toggle';
-import { SectionHeading } from '../components/components/components/section-heading';
-import { siteContent, type Lang } from '../components/site-content';
+import { HasLogo } from '../components/has-logo';
+import { LanguageToggle } from '../components/language-toggle';
+import { SectionHeading } from '../components/section-heading';
+import { siteContent, type Lang } from '../site-content';
 
 const links = ['home', 'about', 'services', 'portfolio', 'contact'];
 const whatsappUrl = 'https://wa.me/96555859392';
