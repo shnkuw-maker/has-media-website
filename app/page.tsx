@@ -1,5 +1,8 @@
 'use client';
 
+import { motion } from 'framer-motion';
+import { useMemo, useState } from 'react';
+
 import { HasLogo } from '../components/has-logo';
 import { LanguageToggle } from '../components/language-toggle';
 import { SectionHeading } from '../components/section-heading';
