@@ -1,16 +1,16 @@
-export const metadata = {
-  title: "HAS MEDIA",
-  description: "شركة هاس ميديا للدعاية والإعلان",
+import type { Metadata } from 'next';
+import './globals.css';
+
+export const metadata: Metadata = {
+  title: 'HAS MEDIA | Luxury Marketing Agency Kuwait',
+  description:
+    'HAS MEDIA is a luxury bilingual marketing agency in Kuwait delivering premium branding, content, campaigns, and digital growth.',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ar">
-      <body>{children}</body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }
